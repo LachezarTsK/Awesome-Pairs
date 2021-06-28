@@ -1,4 +1,3 @@
-package awesomePairs;
 
 import java.util.Map;
 import java.util.HashMap;
@@ -53,16 +52,13 @@ public class Solution {
 
         double log10_2 = Math.log10(2);
         for (int i = 0; i < arr.length; i++) {
-
-            if (arr[i] == 1) {
-                fillMap(map_log2ArrayValue_to_frequency, 0);
-            } else if (arr[i] > 1) {
+            
+             if (arr[i] > 0) {
                 double logTenValue = Math.log10(arr[i]);
                 int value = (int) (logTenValue / log10_2);
                 fillMap(map_log2ArrayValue_to_frequency, value);
             }
         }
-
     }
 
     public long countPairs() {
