@@ -1,9 +1,14 @@
+package awesomePairs;
 
 import java.util.Map;
 import java.util.HashMap;
 
 public class Solution {
 
+    /*
+    Map Keys: log2 of the array values.
+    Map Values: number of occurences for each key.
+     */
     public Map<Integer, Integer> map_log2ArrayValue_to_frequency = new HashMap<Integer, Integer>();
 
     /*
@@ -20,7 +25,7 @@ public class Solution {
     /*
     Due to the strict time limits, the approach of simply iterating through
     the array, doing the bitwise AND, bitwise XOR and then
-    comparing the values, will exceed by far the time limits.
+    comparing the values, will exceed by far the time limit.
     
     So, the approach applied here is as follows: 
     if the bitwise AND is to be strictly larger than the bitwsie XOR 
@@ -29,8 +34,8 @@ public class Solution {
     
     Therefore, in order to calculate which pairs have bitwise AND 
     strictly larger than bitwise XOR, we have to find 
-    the position of leading bit for each array value, as well
-    as the frequecy of this position.
+    the position of leading bit for each array value and record 
+    the number of occurences for this position.
     
     The position of the leading bit can be found
     by calculating 'Math.floor(log2_arrayValue)' 
@@ -44,28 +49,34 @@ public class Solution {
     log10_arrayValue / log10_2 = log2_arrayValue.
     And then update their respective frequency in the map.
     
-    The above-mentioned approach is well below the stipulated
+    With this approach, the solution is well below the stipulated
     time limit of 1,79 seconds: it takes all test cases below 
-    half this time, appriximately 0,72 s.
+    half this time, appriximately 0,72 seconds.
      */
     public void calculate_log2ArrayValue(int[] arr) {
 
         double log10_2 = Math.log10(2);
         for (int i = 0; i < arr.length; i++) {
-            
-             if (arr[i] > 0) {
+            if (arr[i] > 0) {
                 double logTenValue = Math.log10(arr[i]);
                 int value = (int) (logTenValue / log10_2);
                 fillMap(map_log2ArrayValue_to_frequency, value);
             }
         }
+
     }
 
+    /*
+    Counts all possible combinations for picking two integers 
+    with the same leading digit, where the order of selection does not matter.
+    @return A long integer, representing the maximum number of awesome paris.
+     */
     public long countPairs() {
+
         long count = 0;
         for (int n : map_log2ArrayValue_to_frequency.keySet()) {
-            int freq = map_log2ArrayValue_to_frequency.get(n);
-            long current = ((long) freq * (freq - 1)) / 2;
+            int frequency = map_log2ArrayValue_to_frequency.get(n);
+            long current = ((long) frequency * (frequency - 1)) / 2;
             count += current;
         }
         return count;
