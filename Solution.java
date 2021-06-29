@@ -1,4 +1,3 @@
-package awesomePairs;
 
 import java.util.Map;
 import java.util.HashMap;
@@ -69,6 +68,7 @@ public class Solution {
     /*
     Counts all possible combinations for picking two integers 
     with the same leading digit, where the order of selection does not matter.
+    
     @return A long integer, representing the maximum number of awesome paris.
      */
     public long countPairs() {
